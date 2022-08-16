@@ -1,3 +1,4 @@
+// by running ts-node for this file, we're deploying the contract on Ganach
 import { ethers } from "ethers";
 import fs from "fs-extra";
 import dotenv from "dotenv";
