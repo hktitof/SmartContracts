@@ -21,9 +21,9 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../common";
 
-export interface SimpleStorageInterface extends utils.Interface {
+export interface TestInterface extends utils.Interface {
   functions: {
     "set(uint256)": FunctionFragment;
     "storedData()": FunctionFragment;
@@ -66,12 +66,12 @@ export interface SimpleStorageInterface extends utils.Interface {
   events: {};
 }
 
-export interface SimpleStorage extends BaseContract {
+export interface Test extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SimpleStorageInterface;
+  interface: TestInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,

@@ -21,7 +21,7 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "./common";
+} from "../../common";
 
 export interface SimpleStorageInterface extends utils.Interface {
   functions: {
