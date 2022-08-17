@@ -9,6 +9,7 @@ async function main() {
   await simpleStroage.deployed();
   console.log(`Deployed contract to : ${simpleStroage.address}`);
 }
+// verify contract programatically through etherscan API
 
 // main
 main()
