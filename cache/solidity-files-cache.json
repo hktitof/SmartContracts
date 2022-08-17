@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/test.sol": {
-      "lastModificationDate": 1660749988023,
-      "contentHash": "c2971132b032146295f67c4072404012",
+      "lastModificationDate": 1660752730344,
+      "contentHash": "a594b6c57bdc04b4e2279986f15f4098",
       "sourceName": "contracts/test.sol",
       "solcConfig": {
         "version": "0.8.8",
