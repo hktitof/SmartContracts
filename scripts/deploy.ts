@@ -5,7 +5,7 @@ deploy contract to hardhat : $ yarn hardhat run scripts/deploy.ts --network hard
 */
 
 //imports
-// INFORMATIONAL  run : allows us to run any Hardhat tasks for us
+// ? INFORMATIONAL  run is Hardhat task
 import { ethers, run, network } from "hardhat";
 //async main/
 async function main() {
@@ -35,7 +35,7 @@ async function verify(contractAddress:string, args:any) {
       constructorArguments: args,
     });
   } catch (error) {
-    // use instanceof to ccheck if the error is an instance of the Error object.
+    // use instanceof to check if the error is an instance of the Error object.
     if (error instanceof Error) {
       if(error.message.toLowerCase().includes("already verified")){
         console.log("contract already verified");
