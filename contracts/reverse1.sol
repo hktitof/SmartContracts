@@ -7,6 +7,6 @@ error beginFailed();
 
 contract reverse1 {
     receive() external payable {
-        if (address(this).balance == 0) revert lowBalance();
+        if (address(this).balance == 0) revert LowBalance();
     }
 }
