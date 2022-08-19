@@ -23,7 +23,7 @@ import type {
   PromiseOrValue,
 } from "../common";
 
-export interface TestInterface extends utils.Interface {
+export interface SimpleStorageInterface extends utils.Interface {
   functions: {
     "addPerson(string,uint256)": FunctionFragment;
     "nameToFavoriteNumber(string)": FunctionFragment;
@@ -71,12 +71,12 @@ export interface TestInterface extends utils.Interface {
   events: {};
 }
 
-export interface Test extends BaseContract {
+export interface SimpleStorage extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: TestInterface;
+  interface: SimpleStorageInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,

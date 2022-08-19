@@ -1,9 +1,79 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/reverse1.sol": {
+      "lastModificationDate": 1660805804990,
+      "contentHash": "0a70ddc536a4e5975dcd692e1ba1b750",
+      "sourceName": "contracts/reverse1.sol",
+      "solcConfig": {
+        "version": "0.8.8",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "reverse1"
+      ]
+    },
+    "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/reverse2.sol": {
+      "lastModificationDate": 1660805620240,
+      "contentHash": "7d172fb3c3d46ec0965035b1ac5ef0df",
+      "sourceName": "contracts/reverse2.sol",
+      "solcConfig": {
+        "version": "0.8.8",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "Reverse2"
+      ]
+    },
     "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/test.sol": {
-      "lastModificationDate": 1660752730344,
-      "contentHash": "a594b6c57bdc04b4e2279986f15f4098",
+      "lastModificationDate": 1660893585205,
+      "contentHash": "a3779498463daf707bba8408dded06c4",
       "sourceName": "contracts/test.sol",
       "solcConfig": {
         "version": "0.8.8",

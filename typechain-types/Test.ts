@@ -25,23 +25,48 @@ import type {
 
 export interface TestInterface extends utils.Interface {
   functions: {
-    "set(uint256)": FunctionFragment;
-    "storedData()": FunctionFragment;
+    "addPerson(string,uint256)": FunctionFragment;
+    "nameToFavoriteNumber(string)": FunctionFragment;
+    "people(uint256)": FunctionFragment;
+    "retrieve()": FunctionFragment;
+    "store(uint256)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "set" | "storedData"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic:
+      | "addPerson"
+      | "nameToFavoriteNumber"
+      | "people"
+      | "retrieve"
+      | "store"
+  ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "set",
+    functionFragment: "addPerson",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nameToFavoriteNumber",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "people",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "retrieve", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "storedData",
-    values?: undefined
+    functionFragment: "store",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
 
-  decodeFunctionResult(functionFragment: "set", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "storedData", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addPerson", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nameToFavoriteNumber",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "people", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "retrieve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "store", data: BytesLike): Result;
 
   events: {};
 }
@@ -73,47 +98,131 @@ export interface Test extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    set(
-      x: PromiseOrValue<BigNumberish>,
+    addPerson(
+      _name: PromiseOrValue<string>,
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    storedData(overrides?: CallOverrides): Promise<[BigNumber]>;
+    nameToFavoriteNumber(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    people(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, string] & { favoriteNumber: BigNumber; name: string }
+    >;
+
+    retrieve(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    store(
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  set(
-    x: PromiseOrValue<BigNumberish>,
+  addPerson(
+    _name: PromiseOrValue<string>,
+    _favoriteNumber: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  storedData(overrides?: CallOverrides): Promise<BigNumber>;
+  nameToFavoriteNumber(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  people(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<[BigNumber, string] & { favoriteNumber: BigNumber; name: string }>;
+
+  retrieve(overrides?: CallOverrides): Promise<BigNumber>;
+
+  store(
+    _favoriteNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    set(
-      x: PromiseOrValue<BigNumberish>,
+    addPerson(
+      _name: PromiseOrValue<string>,
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    storedData(overrides?: CallOverrides): Promise<BigNumber>;
+    nameToFavoriteNumber(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    people(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, string] & { favoriteNumber: BigNumber; name: string }
+    >;
+
+    retrieve(overrides?: CallOverrides): Promise<BigNumber>;
+
+    store(
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
-    set(
-      x: PromiseOrValue<BigNumberish>,
+    addPerson(
+      _name: PromiseOrValue<string>,
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    storedData(overrides?: CallOverrides): Promise<BigNumber>;
+    nameToFavoriteNumber(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    people(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retrieve(overrides?: CallOverrides): Promise<BigNumber>;
+
+    store(
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    set(
-      x: PromiseOrValue<BigNumberish>,
+    addPerson(
+      _name: PromiseOrValue<string>,
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    storedData(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    nameToFavoriteNumber(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    people(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    retrieve(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    store(
+      _favoriteNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }
