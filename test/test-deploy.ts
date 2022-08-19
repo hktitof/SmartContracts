@@ -18,12 +18,12 @@ describe("test", ()=>{
         a string explaining what the test should do, and a callback function
          which contains our actual test: 
     */
-    it("1 it should start with a favorite number of 0", async () =>{
+    it("#1 it should start with a favorite number of 0", async () =>{
         const currentValue = await contract.retrieve();
         const expectedValue="0";
         assert.equal(currentValue,expectedValue,"the current value should be 0");
     })
-    it.only("2 it Should update when we call store",async () =>{
+    it.only("#2 it Should update when we call store",async () =>{
         const expectedValue = "7";
         const transactionResponse = await contract.store(expectedValue);
         await transactionResponse.wait(1);
