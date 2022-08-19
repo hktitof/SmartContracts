@@ -6,7 +6,9 @@ import "@nomiclabs/hardhat-ethers"
 import dotenv from "dotenv";
 dotenv.config();
 import "./tasks/block_number"
+// gas reporter it tells us when we do our tests how much gas it cost either deploy or calling functions
 import "hardhat-gas-reporter"
+// coverage is used to know how our tests are
 import "solidity-coverage"
 
 // Variables
