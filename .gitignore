@@ -1,2 +1,7 @@
 .env
 node_modules/
+cache
+artifacts
+gas-report.txt
+cover-report.json
+coverage

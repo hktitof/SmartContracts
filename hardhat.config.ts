@@ -1,11 +1,13 @@
 // imports
 import { HardhatUserConfig } from "hardhat/config";
+import "@nomiclabs/hardhat-waffle"
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-ethers"
 import dotenv from "dotenv";
 dotenv.config();
 import "./tasks/block_number"
 import "hardhat-gas-reporter"
+import "solidity-coverage"
 
 // Variables
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
