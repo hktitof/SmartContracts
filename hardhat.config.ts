@@ -10,6 +10,9 @@ import "./tasks/block_number"
 import "hardhat-gas-reporter"
 // coverage is used to know how our tests are
 import "solidity-coverage"
+// this one is used to give our Contract a correct typing
+// we use "yarn hardhat typechain" => create typechain-types folder with types for all our contracts
+import "@typechain/hardhat"
 
 // Variables
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;

@@ -21,9 +21,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Reverse2__factory>;
     getContractFactory(
-      name: "Test",
+      name: "SimpleStorage",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Test__factory>;
+    ): Promise<Contracts.SimpleStorage__factory>;
 
     getContractAt(
       name: "Reverse1",
@@ -36,10 +36,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Reverse2>;
     getContractAt(
-      name: "Test",
+      name: "SimpleStorage",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.Test>;
+    ): Promise<Contracts.SimpleStorage>;
 
     // default types
     getContractFactory(

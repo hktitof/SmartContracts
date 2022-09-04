@@ -2,5 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as reverse2Sol from "./reverse2.sol";
+export { SimpleStorage__factory } from "./SimpleStorage__factory";
 export { Reverse1__factory } from "./Reverse1__factory";
-export { Test__factory } from "./Test__factory";

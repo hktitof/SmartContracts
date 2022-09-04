@@ -1,4 +1,4 @@
-import { SimpleStorage } from './../typechain-types/SimpleStorage';
+
 /* 
 Commands : 
 deploy contract to hardhat : $ yarn hardhat run scripts/deploy.ts --network hardhat
@@ -26,7 +26,7 @@ async function main() {
   }
 }
 // verify function : it's for contract verification on etherscan programmatically through etherscan API
-async function verify(contractAddress:string, args:any) {
+async function verify(contractAddress:string, args:any[]) {
   console.log("verfiying contract...");
   // try catch is used to check the process, because sometimes it might be already verified
   try {
@@ -34,7 +34,7 @@ async function verify(contractAddress:string, args:any) {
       address: contractAddress,
       constructorArguments: args,
     });
-  } catch (error) {
+  } catch (error:any) {
     // use instanceof to check if the error is an instance of the Error object.
     if (error instanceof Error) {
       if(error.message.toLowerCase().includes("already verified")){

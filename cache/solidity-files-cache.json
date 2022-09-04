@@ -25,9 +25,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -63,9 +60,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -77,10 +71,10 @@
         "Reverse2"
       ]
     },
-    "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/test.sol": {
-      "lastModificationDate": 1660893585205,
-      "contentHash": "a3779498463daf707bba8408dded06c4",
-      "sourceName": "contracts/test.sol",
+    "/Users/abdellatifanaflous/Desktop/Projects/Solidity/contracts/SimpleStorage.sol": {
+      "lastModificationDate": 1662282948344,
+      "contentHash": "d516a62651d2e807e82ebbe1002a6663",
+      "sourceName": "contracts/SimpleStorage.sol",
       "solcConfig": {
         "version": "0.8.8",
         "settings": {
@@ -101,9 +95,6 @@
                 "ast"
               ]
             }
-          },
-          "metadata": {
-            "useLiteralContent": false
           }
         }
       },
@@ -112,7 +103,7 @@
         "^0.8.8"
       ],
       "artifacts": [
-        "test"
+        "SimpleStorage"
       ]
     }
   }

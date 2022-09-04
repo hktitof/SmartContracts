@@ -3,10 +3,10 @@
 /* eslint-disable */
 import type * as reverse2Sol from "./reverse2.sol";
 export type { reverse2Sol };
+export type { SimpleStorage } from "./SimpleStorage";
 export type { Reverse1 } from "./Reverse1";
-export type { Test } from "./Test";
 export * as factories from "./factories";
 export { Reverse1__factory } from "./factories/Reverse1__factory";
 export type { Reverse2 } from "./reverse2.sol/Reverse2";
 export { Reverse2__factory } from "./factories/reverse2.sol/Reverse2__factory";
-export { Test__factory } from "./factories/Test__factory";
+export { SimpleStorage__factory } from "./factories/SimpleStorage__factory";
