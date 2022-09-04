@@ -21,7 +21,7 @@ import "@typechain/hardhat";
 import "@nomiclabs/hardhat-solhint";
 
 // a Hardhat Plugin For Replicable Deployments And Easy Testing
-import "@hardhat-deploy";
+import "hardhat-deploy";
 
 // Variables
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
