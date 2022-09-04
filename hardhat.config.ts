@@ -20,6 +20,9 @@ import "@typechain/hardhat";
 // usage : yrn hardhat check
 import "@nomiclabs/hardhat-solhint";
 
+// a Hardhat Plugin For Replicable Deployments And Easy Testing
+import "@hardhat-deploy";
+
 // Variables
 const PRIVATE_KEY = process.env.PRIVATE_KEY!;
 const RPC_URL = process.env.RPC_URL!;
