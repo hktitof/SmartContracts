@@ -14,7 +14,7 @@ import "solidity-coverage";
 // we use "yarn hardhat typechain" => create typechain-types folder with types for all our contracts
 import "@typechain/hardhat";
 
-// solhint : The linting solutions available for detecting code vulnerabilities of the Solidity programming 
+// solhint : The linting solutions available for detecting code vulnerabilities of the Solidity programming
 // language — underlying smart contracts in Ethereum — mostly focus on the code compliance with the best
 // linting practices.
 // usage : yrn hardhat check
@@ -31,9 +31,19 @@ const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY!;
 
 const config: HardhatUserConfig = {
   // ? if you don't specify defaultNetwork it's by the default "hardhat" => defaultNetwork: "hardhat"
-  solidity: "0.8.8",
+  // solidity: "0.8.8",
+  solidity: {
+    compilers: [
+      { version: "0.8.8", settings: {} },
+      { version: "0.6.6", settings: {} },
+    ],
+  },
   defaultNetwork: "hardhat",
   networks: {
+    hardhat: {
+      chainId: 31337,
+      // gasPrice: 130000000000,
+    },
     rinkeby: {
       url: RPC_URL,
       accounts: [PRIVATE_KEY!],
@@ -49,7 +59,7 @@ const config: HardhatUserConfig = {
     apiKey: ETHER_SCAN_API_KEY,
   },
   gasReporter: {
-    // change it to false to disable gas reporter
+    // change it to true to enable gas reporter
     enabled: false,
     outputFile: "gas-report.txt",
     noColors: true,
@@ -57,6 +67,14 @@ const config: HardhatUserConfig = {
     coinmarketcap: COINMARKETCAP_API_KEY,
     // specify the gas price "token" convert to USD, by the default it's ETH
     // token:"ETH"
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+    player: {
+      default: 1,
+    },
   },
 };
 
