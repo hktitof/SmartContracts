@@ -33,9 +33,7 @@ describe("FundMe", async () => {
   // test for the fundMe function
   describe("fund", async () => {
     it("Fails if you don't send enough ETH", async () => {
-      await expect(fundMe.fund()).to.be.revertedWith(
-        "You need to spend more ETH!"
-      );
+      await expect(fundMe.fund()).to.be.revertedWith("You need to spend more ETH!");
     });
     it("updated the amount funded in addressToAmountFunded Array by the sender", async () => {
       await fundMe.fund({ value: sendValue });
@@ -63,34 +61,69 @@ describe("FundMe", async () => {
        * 3. Assert
        */
       // 1. Arrange
-      const startingFundMeBalance = await fundMe.provider.getBalance(
-        fundMe.address
-      );
-      const startingDeployerBalance = await fundMe.provider.getBalance(
-        deployer.address
-      );
+      // get the balance of the deployer and the contract before withdraw
+      const startingFundMeBalance = await fundMe.provider.getBalance(fundMe.address);
+      const startingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
       // 2. Act
       const transactionResponse = await fundMe.withdraw();
       const transactionReceipt = await transactionResponse.wait(1);
-
-      const endingFundMeBlance = await fundMe.provider.getBalance(
-        fundMe.address
-      );
-      const endingDeployerBalance = await fundMe.provider.getBalance(
-        deployer.address
-      );
+      const { gasUsed, effectiveGasPrice } = transactionReceipt;
+      const gasCost = gasUsed.mul(effectiveGasPrice);
+      const endingFundMeBlance = await fundMe.provider.getBalance(fundMe.address);
+      const endingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
 
       // 3. Assert
       // Note that the deployer has spent some gas, so we need to account for that
       assert.equal(endingFundMeBlance.toString(), String("0"));
       assert.equal(
         startingFundMeBalance.add(startingDeployerBalance).toString(),
-        endingDeployerBalance
-          .add(
-            transactionReceipt.gasUsed.mul(transactionReceipt.effectiveGasPrice)
-          )
-          .toString()
+        endingDeployerBalance.add(gasCost).toString()
       );
     });
+
+    it("allows us to withdraw with multiple funders", async () => {
+      const accounts = await ethers.getSigners(); // get all accounts
+      // Arrange process
+
+      // fund the contract from 6 accounts, note that account 0 is the deployer
+      for (let i = 1; i < 6; i++) {
+        const fundMeConnectedContract = await fundMe.connect(accounts[i]);
+        await fundMeConnectedContract.fund({ value: sendValue });
+      }
+      const startingFundMeBalance = await fundMe.provider.getBalance(fundMe.address);
+      const startingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
+
+      //Act
+      const transactionResponse = await fundMe.withdraw();
+      const transactionReceipt = await transactionResponse.wait(1);
+      const { gasUsed, effectiveGasPrice } = transactionReceipt;
+      const gasCost = gasUsed.mul(effectiveGasPrice);
+
+      //Assert
+      const endingFundMeBlance = await fundMe.provider.getBalance(fundMe.address);
+      const endingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
+      assert.equal(endingFundMeBlance.toString(), String("0"));
+      assert.equal(
+        startingFundMeBalance.add(startingDeployerBalance).toString(),
+        endingDeployerBalance.add(gasCost).toString()
+      );
+
+      // Make sure that the funders array is empty
+      await expect(fundMe.funders(0)).to.be.reverted;
+      for (let i = 1; i < 6; i++) {
+        assert.equal(await (await fundMe.addressToAmountFunded(accounts[i].address)).toString(), "0");
+      }
+    });
+
+
+    //test Only owner allowed to withdraw
+    it("Only owner allowed to withdraw", async () => {
+      const accounts = await  ethers.getSigners();
+      const attacker= accounts[1];
+      const attackerConnectedContract = await fundMe.connect(attacker);
+      const result = await expect(attackerConnectedContract.withdraw()).to.be.revertedWithCustomError(attackerConnectedContract,"FunMe__NotOwner");
+
+    });
+
   });
 });
