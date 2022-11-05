@@ -28,6 +28,8 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY!;
 const RPC_URL = process.env.RPC_URL!;
 const ETHER_SCAN_API_KEY = process.env.ETHERSCAN_API_KEY!;
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY!;
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL!;
+const GOARLI_RPC_URL = process.env.GOARLI_RPC_URL!;
 
 const config: HardhatUserConfig = {
   // ? if you don't specify defaultNetwork it's by the default "hardhat" => defaultNetwork: "hardhat"
@@ -43,6 +45,16 @@ const config: HardhatUserConfig = {
     hardhat: {
       chainId: 31337,
       // gasPrice: 130000000000,
+    },
+    mumbai: {
+      url: MUMBAI_RPC_URL,
+      accounts: [PRIVATE_KEY],
+      chainId: 80001,
+    },
+    goerli: {
+      chainId: 5,
+      url: GOARLI_RPC_URL,
+      accounts: [PRIVATE_KEY!],
     },
     rinkeby: {
       url: RPC_URL,

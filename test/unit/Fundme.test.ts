@@ -26,23 +26,23 @@ describe("FundMe", async () => {
   // test for the constructor
   describe("constructor", function() {
     it("sets the aggregator addresses correctly", async () => {
-      const response = await fundMe.priceFeed();
+      const response = await fundMe.getPriceFeed();
       assert.equal(response, mockV3Aggregator.address);
     });
   });
   // test for the fundMe function
   describe("fund", async () => {
     it("Fails if you don't send enough ETH", async () => {
-      await expect(fundMe.fund()).to.be.revertedWith("You need to spend more ETH!");
+      await expect(fundMe.fund()).to.be.revertedWithCustomError(fundMe,"NotEnoughETH");
     });
-    it("updated the amount funded in addressToAmountFunded Array by the sender", async () => {
+    it("updated the amount funded in getAdressToAmountFunded Array by the sender", async () => {
       await fundMe.fund({ value: sendValue });
-      const response = await fundMe.addressToAmountFunded(deployer.address);
+      const response = await fundMe.getAdressToAmountFunded(deployer.address);
       assert.equal(response.toString(), sendValue.toString());
     });
-    it("Check if the sender Address is added to funders Array", async () => {
+    it("Check if the sender Address is added to getFunders Array", async () => {
       await fundMe.fund({ value: sendValue });
-      const funder = await fundMe.funders(0);
+      const funder = await fundMe.getFunders(0);
       assert.equal(funder, deployer.address);
     });
   });
@@ -81,7 +81,7 @@ describe("FundMe", async () => {
       );
     });
 
-    it("allows us to withdraw with multiple funders", async () => {
+    it("allows us to withdraw with multiple getFunders", async () => {
       const accounts = await ethers.getSigners(); // get all accounts
       // Arrange process
 
@@ -108,10 +108,10 @@ describe("FundMe", async () => {
         endingDeployerBalance.add(gasCost).toString()
       );
 
-      // Make sure that the funders array is empty
-      await expect(fundMe.funders(0)).to.be.reverted;
+      // Make sure that the getFunders array is empty
+      await expect(fundMe.getFunders(0)).to.be.reverted;
       for (let i = 1; i < 6; i++) {
-        assert.equal(await (await fundMe.addressToAmountFunded(accounts[i].address)).toString(), "0");
+        assert.equal(await (await fundMe.getAdressToAmountFunded(accounts[i].address)).toString(), "0");
       }
     });
 
@@ -123,6 +123,41 @@ describe("FundMe", async () => {
       const attackerConnectedContract = await fundMe.connect(attacker);
       const result = await expect(attackerConnectedContract.withdraw()).to.be.revertedWithCustomError(attackerConnectedContract,"FunMe__NotOwner");
 
+    });
+
+
+    it("cheaperWithDraw : allows us to withdraw with multiple s_getFunders", async () => {
+      const accounts = await ethers.getSigners(); // get all accounts
+      // Arrange process
+
+      // fund the contract from 6 accounts, note that account 0 is the deployer
+      for (let i = 1; i < 6; i++) {
+        const fundMeConnectedContract = await fundMe.connect(accounts[i]);
+        await fundMeConnectedContract.fund({ value: sendValue });
+      }
+      const startingFundMeBalance = await fundMe.provider.getBalance(fundMe.address);
+      const startingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
+
+      //Act
+      const transactionResponse = await fundMe.cheaperWithdraw();
+      const transactionReceipt = await transactionResponse.wait(1);
+      const { gasUsed, effectiveGasPrice } = transactionReceipt;
+      const gasCost = gasUsed.mul(effectiveGasPrice);
+
+      //Assert
+      const endingFundMeBlance = await fundMe.provider.getBalance(fundMe.address);
+      const endingDeployerBalance = await fundMe.provider.getBalance(deployer.address);
+      assert.equal(endingFundMeBlance.toString(), String("0"));
+      assert.equal(
+        startingFundMeBalance.add(startingDeployerBalance).toString(),
+        endingDeployerBalance.add(gasCost).toString()
+      );
+
+      // Make sure that the getFunders array is empty
+      await expect(fundMe.getFunders(0)).to.be.reverted;
+      for (let i = 1; i < 6; i++) {
+        assert.equal(await (await fundMe.getAdressToAmountFunded(accounts[i].address)).toString(), "0");
+      }
     });
 
   });

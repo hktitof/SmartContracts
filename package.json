@@ -5,6 +5,11 @@
   "author": "titof <hktitof@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test":"yarn hardhat test",
+    "lint":"yarn solhint 'contract/*.sol'",
+    "lint:fix":"yarn solhint 'contract/*.sol' --fix",
+    "format":"yarn prettier --write .",
+    "coverage":"yarn hardhat coverage",
     "remixd": "node node_modules/@remix-project/remixd/src/bin/remixd.js",
     "compile": "yarn /Users/abdellatifanaflous/Desktop/Projects/Solidity/node_modules/solc/solc.js  --bin --abi --include-path ../node_modules/ --base-path . "
   },

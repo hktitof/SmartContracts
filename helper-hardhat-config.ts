@@ -24,6 +24,12 @@ export const networkConfig: networkConfigInfo = {
     ethUsdPriceFeed: "0xF9680D99D6C9589e2a93a78A04A279e509205945",
     blockConfirmations: 6,
   },
+  // if it's goerli Network use this address "0xF9680D99D6C9589e2a93a78A04A279e509205945"
+  goerli: {
+    ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
+    blockConfirmations: 6,
+  },
+  
   // Price Feed Address, values can be obtained at https://docs.chain.link/docs/reference-contracts
   // Default one is ETH/USD contract on Kovan
   kovan: {
